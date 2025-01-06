@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    password: ${SPRING_DATASOURCE_PASSWORD}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    url: ${SPRING_DATASOURCE_URL}
+  flyway:
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+    url: ${SPRING_DATASOURCE_URL}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    driver: com.mysql.cj.jdbc.Driver
+    database: web_atrio
+    enabled: true

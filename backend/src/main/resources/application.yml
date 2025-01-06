@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: backend
+  datasource:
+    url: jdbc:mysql://localhost:3336/web_atrio
+    username: web
+    password: artio
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  flyway:
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+    url: jdbc:mysql://localhost:3336/web_atrio
+    user: web
+    password: artio
+    driver: com.mysql.cj.jdbc.Driver
+    database: web_atrio
+    enabled: true
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+
+
+logging:
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
+        SQL: Debug
