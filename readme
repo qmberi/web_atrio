@@ -1,0 +1,10 @@
+Pour lancer ce projet il vous faut docker-compose uniquement
+
+Il vous faut avoir les ports 3000, 8080 et 3336 de libre.
+
+lancer la commande : docker-compose up --build
+
+vous aurez alors un java ici :  http://localhost:8080/
+avec un swagger ici : http://localhost:8080/v3/api-docs
+
+Et enfin un front ici : http://localhost:3000/
