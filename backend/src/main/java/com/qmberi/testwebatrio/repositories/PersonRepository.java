@@ -16,4 +16,6 @@ public interface PersonRepository extends JpaRepository<Person, Integer> {
             "left outer join enterprise e on e.id = pj.enterprise_id\n" +
             "where e.name = :name", nativeQuery = true)
     List<Person> findAllPersonWorkWithAnEnterprise (@Param("name") String name);
+
+    List<Person> findAllByOrderByLastnameAscFirstnameAsc();
 }

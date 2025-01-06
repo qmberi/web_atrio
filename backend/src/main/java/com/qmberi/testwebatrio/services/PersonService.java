@@ -40,7 +40,7 @@ public class PersonService {
         return personRepository.findById(finalPerson.getId());
     }
     public List<Person> findAll() {
-        return personRepository.findAll().stream().toList();
+        return personRepository.findAllByOrderByLastnameAscFirstnameAsc().stream().toList();
     }
 
     public List<Person> findAllPersonWhoWorkInEnterprise (String name) {

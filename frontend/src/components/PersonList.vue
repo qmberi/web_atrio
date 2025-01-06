@@ -8,9 +8,9 @@
                 <br />
                 Job principal : 
                 <span v-if="person.jobs && person.jobs.length > 0">
-                {{ person.jobs[0].name }} chez {{ person.jobs[0].enterprise.name }} ({{ person.jobs[0].startDate }} - 
-                <span v-if="person.jobs[0].isCurrent">Actuel</span>
-                <span v-else>{{ person.jobs[0].endDate }}</span>)
+                {{ person.jobs[0].name }} chez {{ person.jobs[0].enterprise.name }} ({{ new Date(person.jobs[0].startDate).toLocaleDateString() }} 
+                <span v-if="person.jobs[0].isCurrent"> - Actuel</span>
+                <span v-else> - {{ new Date(person.jobs[0].endDate).toLocaleDateString() }}</span>)
                 </span>
                 <span v-else>Aucun job</span>
             </li>
