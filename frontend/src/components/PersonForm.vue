@@ -21,9 +21,19 @@
           <label :for="'job-name-' + index">Nom du Job:</label>
           <input
             :id="'job-name-' + index"
-            v-model="job.name"
+            v-model="job.jobTitle"
             type="text"
             placeholder="Nom du job"
+            required
+          />
+        </div>
+        <div>
+          <label :for="'enterpris-' + index">Nom de la boite:</label>
+          <input
+            :id="'enterpris-' + index"
+            v-model="job.enterprise"
+            type="text"
+            placeholder="Nom de la boite"
             required
           />
         </div>
@@ -35,6 +45,14 @@
             type="date"
             required
           />
+        </div> 
+        <div>
+          <label :for="'job-current-' + index">Job actuel:</label>
+          <input
+            type="checkbox"
+            :id="'job-current-' + index"
+            v-model="job.isCurrent"
+          />
         </div>
         <div>
           <label :for="'job-end-' + index">Date de fin:</label>
@@ -42,7 +60,6 @@
             :id="'job-end-' + index"
             v-model="job.endDate"
             type="date"
-            required
           />
         </div>
         <button type="button" @click="removeJob(index)">Supprimer ce job</button>
@@ -59,49 +76,60 @@ import { ref } from 'vue';
 
 export default {
     setup() {
-      // Formulaire réactif
-        const form = ref({
-        firstname: "",
-        lastname: "",
-        birthDate: "",
-        jobs: [
+        // Formulaire réactif
+        const initialFormData = {
+          firstname: "Quentin",
+          lastname: "Mberi",
+          birthDate: "",
+          jobs: [
             {
-            name: "",
-            startDate: "",
-            endDate: "",
+              jobTitle: "dev",
+              startDate: "",
+              endDate: "",
+              enterprise: "",
+              isCurrent: false
             },
-        ],
-        });
+          ],
+        };
+        const personStore = usePersonStore();
+        const form = ref({ ...initialFormData });
 
         // Indicateur pour savoir si le formulaire a été soumis
         const submitted = ref(false);
 
         // Ajouter un job vide
         const addJob = () => {
-        form.value.jobs.push({
-            name: "",
-            startDate: "",
-            endDate: "",
-        });
+            form.value.jobs.push({
+                jobTitle: "",
+                enterprise: "",
+                isCurrent:false,
+                startDate: "",
+                endDate: "",
+            });
         };
 
         // Supprimer un job
         const removeJob = (index) => {
-        form.value.jobs.splice(index, 1);
+            form.value.jobs.splice(index, 1);
         };
 
         // Soumettre le formulaire
-        const submitForm = () => {
-        submitted.value = true;
-        console.log("Formulaire soumis :", form.value);
+        const submitForm = async () => {
+            submitted.value = true;
+
+            await personStore.createPerson(form.value);
+
+            // Réinitialiser le formulaire
+            //form.value = { ...initialFormData };
+            console.log("Formulaire soumis :", form.value);
         };
 
         return {
-        form,
-        submitted,
-        addJob,
-        removeJob,
-        submitForm,
+            form,
+            submitted,
+            addJob,
+            removeJob,
+            submitForm,
         };
     }
 };

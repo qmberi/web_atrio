@@ -21,7 +21,7 @@ export const usePersonStore = defineStore('person', {
         },
         async createPerson(data) {
             try {
-                const response = await apiClient.post('/person', { data });
+                const response = await apiClient.post('/person', data);
 
                 this.persons.push(response.data);
             } catch (error) {
